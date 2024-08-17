@@ -7,10 +7,12 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Map;
 
 
 @org.hibernate.annotations.NamedQuery(name="User.findByEmailID",query = "select u from User u where u.email=:email")
+@org.hibernate.annotations.NamedQuery(name="User.findByEmailAndPassword",query = "select u from User u where u.email=:email and u.password=:password")
 @Data
 @Entity
 @DynamicUpdate
@@ -18,32 +20,30 @@ import java.util.Map;
 @Table(name="user")
 public class User implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="contact_number")
+    @Column(name = "contact_number")
     private String contactNumber;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name="status")
+    @Column(name = "status")
     private String status;
 
-    @Column(name="role")
+    @Column(name = "role")
     private String role;
-
-
 
 
 }

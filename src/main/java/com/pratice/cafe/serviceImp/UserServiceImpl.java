@@ -1,5 +1,7 @@
 package com.pratice.cafe.serviceImp;
 
+import com.pratice.cafe.JWT.CustomerUserDetailsService;
+import com.pratice.cafe.JWT.JwtUtils;
 import com.pratice.cafe.POJO.User;
 import com.pratice.cafe.constants.CafeConstants;
 import com.pratice.cafe.dao.UserDao;
@@ -9,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -21,6 +26,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+
+    AuthenticationManager authenticationManager;
+
+    CustomerUserDetailsService customerUserDetailsService;
+
+    JwtUtils jwtUtils;
 
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMapping) {
@@ -44,6 +55,34 @@ public class UserServiceImpl implements UserService {
         }
         return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG,HttpStatus.BAD_REQUEST);
     }
+
+    @Override
+    public ResponseEntity<String> login(Map<String, String> requestMapping) {
+        log.info("Inside login Method :{}", requestMapping);
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(requestMapping.get("email"), requestMapping.get("password")));
+
+            if (authentication.isAuthenticated()) {
+                if (customerUserDetailsService.getUserDetails().getStatus().equalsIgnoreCase("true")) {
+                    return new ResponseEntity<String>("{\"token\":\"" +
+                            jwtUtils.generateToken(customerUserDetailsService.getUserDetails().getEmail(), customerUserDetailsService.getUserDetails().getRole()) + "\"}",
+                            HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<String>("{\"message\":\"Wait for admin approval\"}", HttpStatus.BAD_REQUEST);
+                }
+            } else {
+                return new ResponseEntity<String>("{\"message\":\"Invalid credentials\"}", HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception e) {
+            // Handle any exceptions that occur during authentication or token generation
+            e.printStackTrace(); // Log the exception for debugging purposes (optional)
+            return CafeUtils.getResponseEntity(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
     private boolean validRequestMap(Map<String,String> requestMapping){
         if(requestMapping.containsKey("name") && requestMapping.containsKey("email")
        && requestMapping.containsKey("contact_number") && requestMapping.containsKey("password")){

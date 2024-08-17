@@ -10,4 +10,5 @@ import java.util.Map;
 @RestController
 public interface UserService {
     ResponseEntity<String> signUp(Map<String, String> requestMapping);
+    ResponseEntity<String> login(Map<String, String> requestMapping);
 }

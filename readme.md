@@ -16,3 +16,11 @@ that class, declare function to fetch data
 API and create a signup rest controller to signup new user
 10. Add the constraints and test the API using postman,
 
+DAY 2
+11. Adding functionality of JWT token 
+JwtUtils: Handles JWT creation, validation, and extraction of information.
+SecurityConfig: Configures Spring Security to enforce security rules.
+JwtFilter: A filter that intercepts incoming requests to validate JWT token
+12. Adding login functionality that is authenicated by authenicationManger
+-the password is checked by Spring Security’s AuthenticationManager, which uses the UserDetailsService 
+to load user details from the database and compare the provided password with the stored password
