@@ -1,6 +1,7 @@
 package com.pratice.cafe.JWT;
 
 import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
 
@@ -36,7 +38,7 @@ public class JwtFilter extends OncePerRequestFilter {
         else {
             String authorizationHeaders=httpServletRequest.getHeader("Authorization");
             String token=null;
-
+            log.info("Link path :{}",httpServletRequest.getServletPath());
             if(authorizationHeaders!=null&& authorizationHeaders.startsWith("Bearer ")){
                 token=authorizationHeaders.substring(7);
                 userName=utils.extractUsername(token);
@@ -45,7 +47,7 @@ public class JwtFilter extends OncePerRequestFilter {
             }
             if (userName!=null && SecurityContextHolder.getContext().getAuthentication()==null){
                 UserDetails userDetails=customerUserDetailsService.loadUserByUsername(userName);
-                if(utils.ValidateToken(userName,userDetails)){
+                if(utils.validateToken(userName,userDetails)){
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken=
                             new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                     usernamePasswordAuthenticationToken.setDetails(
@@ -66,7 +68,7 @@ public class JwtFilter extends OncePerRequestFilter {
         return "user".equalsIgnoreCase((String) claims.get("role"));
     }
 
-    public String getCorrectUser(){
+    public String getCurrentUser(){
         return  userName;
     }
 }
