@@ -12,7 +12,10 @@ import java.util.Map;
 
 
 @org.hibernate.annotations.NamedQuery(name="User.findByEmailID",query = "select u from User u where u.email=:email")
-@org.hibernate.annotations.NamedQuery(name="User.findByEmailAndPassword",query = "select u from User u where u.email=:email and u.password=:password")
+@org.hibernate.annotations.NamedQuery(name="User.getAllUser",query = "select new com.pratice.cafe.wrapper.UserWrapper(u.id,u.name,u.email,u.password,u.contactNumber,u.status) from User u where u.role='user'")
+@org.hibernate.annotations.NamedQuery(name="User.updateStatus",query = "Update User u set status=:status where id=:id")
+@org.hibernate.annotations.NamedQuery(name="User.getAllAdmins",query = "select u.email from User u where u.role='admin'")
+
 @Data
 @Entity
 @DynamicUpdate
@@ -25,7 +28,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
