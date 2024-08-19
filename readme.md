@@ -24,3 +24,10 @@ JwtFilter: A filter that intercepts incoming requests to validate JWT token
 12. Adding login functionality that is authenicated by authenicationManger
 -the password is checked by Spring Security’s AuthenticationManager, which uses the UserDetailsService 
 to load user details from the database and compare the provided password with the stored password
+
+DAY 3
+Implementing and adding more APIs
+13. Get all users day on by the role admin
+14. update the status of the user by the role admin
+15. change password functionality for every user
+
