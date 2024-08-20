@@ -10,14 +10,13 @@ import java.util.Map;
 @RequestMapping("/category")
 public interface CategoryRest {
 
-
-    @PostMapping(path="/addnewcategory")
+    @PostMapping(path="/add")
     public ResponseEntity<String> addNewCategory(@RequestBody(required=true) Map<String,String> requestMapping);
 
-    @GetMapping("/getallcategory")
+    @GetMapping("/getAll")
     ResponseEntity<List<Category>> getAllCategory(@RequestParam(required=false) String filterValue);
 
-    @PostMapping(path="/updatecategory")
+    @PostMapping(path="/updateCategory")
     public ResponseEntity<String> updateCategory(@RequestBody(required=true) Map<String,String> requestMapping);
 
 

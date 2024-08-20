@@ -52,7 +52,7 @@ public class CategoryRestImpl implements CategoryRest {
 
     @Override
     public ResponseEntity<String> updateCategory(Map<String, String> requestMapping) {
-        log.info("inside get All category function category rest impl");
+        log.info("inside update category function category rest impl");
         try {
             return categoryService.updateCategory(requestMapping);
 
@@ -62,5 +62,7 @@ public class CategoryRestImpl implements CategoryRest {
             return new ResponseEntity<String>(CafeConstants.SOMETHING_WENT_WRONG, HttpStatus.BAD_REQUEST);
         }
     }
+
+
 
 }
