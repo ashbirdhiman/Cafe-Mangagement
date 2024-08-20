@@ -31,3 +31,9 @@ Implementing and adding more APIs
 14. update the status of the user by the role admin
 15. change password functionality for every user
 
+DAY 4
+Adding Category POJO and its API
+16. Adding new category
+17. Update Category
+18. Get All Category
+
