@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @org.hibernate.annotations.NamedQuery(name="Product.getAllProduct",query = "select new com.pratice.cafe.wrapper.ProductWrapper(p.id,p.name,p.category,p.description,p.price,p.status) from Product p")
-@org.hibernate.annotations.NamedQuery(name="Product.findByCategoryID",query = "select new com.pratice.cafe.wrapper.ProductWrapper(p.id,p.name,p.category,p.description,p.price,p.status) from Product p where p.category=:id")
+@org.hibernate.annotations.NamedQuery(name="Product.findByCategoryID",query = "select new com.pratice.cafe.wrapper.ProductWrapper(p.id,p.name,p.category,p.description,p.price,p.status) from Product p where p.category.id=:id and p.status='true'")
 
 
 
@@ -29,7 +29,7 @@ public class Product implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categeory_fk" ,nullable = true)
     private Category category;
 

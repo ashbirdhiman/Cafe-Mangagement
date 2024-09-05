@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/user/get","/user/update","/user/changePassword",
                         "/category/add","/category/getAll","/category/updateCategory",
                         "/product/add","/product/getAll","/product/update","/product/delete/{id}",
-                        "/product/getByCategory/{id}","/product/getByCategory/{id}")
+                        "/product/getByCategory/{id}","/product/getByID/{id}")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

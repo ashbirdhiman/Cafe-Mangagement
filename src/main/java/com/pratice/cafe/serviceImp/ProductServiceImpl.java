@@ -163,9 +163,8 @@ public class ProductServiceImpl implements ProductService {
         if(isAdd){
             product.setId(Integer.parseInt(requestMap.get("id")));
 
-        }else{
-            product.setStatus("true");
         }
+        product.setStatus("true");
         product.setName(requestMap.get("name"));
         product.setDescription(requestMap.get("description"));
         product.setPrice(Integer.parseInt(requestMap.get("price")));
