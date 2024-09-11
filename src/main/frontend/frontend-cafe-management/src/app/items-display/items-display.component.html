@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="card" *ngFor="let pizza of pizzas">
+    <img [src]="pizza.imageUrl" alt="Pizza">
+    <div class="card-body">
+      <h3>{{ pizza.title }}</h3>
+      <p>{{ pizza.description }}</p>
+      <button class="btn btn-primary">Order Now</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedPizza" class="selected-pizza">
+  <h2>{{ selectedPizza.name }}</h2>
+  <img src="{{ selectedPizza.imageUrl }}" alt="{{ selectedPizza.name }}">
+  <p>{{ selectedPizza.description }}</p>
+</div>

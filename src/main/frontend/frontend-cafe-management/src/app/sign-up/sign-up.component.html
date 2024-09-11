@@ -1,0 +1,78 @@
+<app-header></app-header>
+
+<br>
+<br>
+<br>
+
+<!-- login.component.html -->
+<div class="login-container">
+    <h2>Sign Up</h2>
+    <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    ngModel
+                    required
+                    #name="ngModel"
+                    class="form-control"
+            />
+            <div *ngIf="name.invalid && name.touched" class="error">
+                Name is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="contact_number">Contact Number:</label>
+            <input
+                    id="contact_number"
+                    type="text"
+                    name="contact_number"
+                    ngModel
+                    required
+                    #contactNumber="ngModel"
+                    class="form-control"
+            />
+            <div *ngIf="contactNumber.invalid && contactNumber.touched" class="error">
+                Contact Number is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    ngModel
+                    required
+                    #email="ngModel"
+                    class="form-control"
+            />
+            <div *ngIf="email.invalid && email.touched" class="error">
+                Valid Email is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    ngModel
+                    required
+                    #password="ngModel"
+                    class="form-control"
+            />
+            <div *ngIf="password.invalid && password.touched" class="error">
+                Password is required.
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>
+
