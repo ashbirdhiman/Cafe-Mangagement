@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<String> addNewProduct(Map<String, String> requestMapping) {
         log.info("Inside Add Product Method :{}",requestMapping);
         try{
-            if(validRequestMap(requestMapping,false) && filter.isAdmin() ){
+            if(validRequestMap(requestMapping,true) && filter.isAdmin() ){
                     productDao.save(getProductFromMap(requestMapping,false));
                     return CafeUtils.getResponseEntity("New Product Added Successfully", HttpStatus.OK);
                 }
