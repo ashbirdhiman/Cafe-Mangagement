@@ -1,1 +1,54 @@
-<p>user-dashboard works!</p>
+<app-header></app-header>
+<div class="dashboard-container">
+  <!-- Sidebar for Categories -->
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened class="sidebar">
+      <mat-list>
+        <h3 mat-subheader>Categories</h3>
+        <mat-list-item *ngFor="let category of categories" (click)="selectCategory(category)">
+          <button mat-button (click)="selectCategory(category)" class="category-button">
+            {{ category.name }}</button>
+        </mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+
+    <!-- Main Content -->
+    <mat-sidenav-content>
+      <div class="content-container">
+        <h2>Products</h2>
+        <div class="products-grid">
+          <mat-card *ngFor="let product of products" class="product-card">
+            <mat-card-header>
+              <mat-card-title>{{ product.name }}</mat-card-title>
+              <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{ product.description }}</p>
+              <p><strong>Price:</strong> {{ product.price }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" (click)="addToCart(product)">Add to Cart</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- Billing Section -->
+  <div class="billing-section">
+    <h2>Cart</h2>
+    <mat-list>
+      <mat-list-item *ngFor="let item of cart">
+        {{ item.name }} - {{ item.price }}
+        <button mat-icon-button (click)="removeFromCart(item)">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+    <div class="total">
+      <h3>Total: {{ getTotal() }}</h3>
+      <button mat-raised-button color="accent" class="checkout-btn" (click)="checkout()">Checkout</button>
+    </div>
+  </div>
+</div>
