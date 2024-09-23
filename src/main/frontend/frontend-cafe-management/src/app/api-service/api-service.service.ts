@@ -2,6 +2,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
+import {Product} from "../../models/product";
 
 @Injectable({
   providedIn:  'root'
@@ -50,7 +51,7 @@ export class ApiService{
     const body = JSON.stringify({ name });
 
     // Make the POST request with the body and headers
-    return this.http.post<any>(`${this.url}/category/add`, body, { headers });
+    return this.http.post<any>(`${this.url}category/add`, body, { headers });
   }
   getAlCategory(): Observable<any> {
     // Retrieve the token from session storage
@@ -66,7 +67,7 @@ export class ApiService{
     const body = JSON.stringify({ name });
 
     // Make the POST request with the body and headers
-    return this.http.get<any>(`${this.url}/category/add`, {headers});
+    return this.http.get<any>(`${this.url}category/getAll`, {headers});
   }
 
 
@@ -85,7 +86,7 @@ export class ApiService{
     const body = JSON.stringify({ id,categoryId,name,price,description });
 
     // Make the POST request with the body and headers
-    return this.http.get<any>(`${this.url}/product/add`, {headers});
+    return this.http.get<any>(`${this.url}product/add`, {headers});
   }
 
   updateProduct(id: string,categoryId:string,name:string,price:string,description:string): Observable<any> {
@@ -102,7 +103,7 @@ export class ApiService{
     const body = JSON.stringify({ id,categoryId,name,price,description });
 
     // Make the POST request with the body and headers
-    return this.http.get<any>(`${this.url}/product/update`, {headers});
+    return this.http.get<any>(`${this.url}product/update`, {headers});
   }
 
   getAllProducts(): Observable<any> {
@@ -119,7 +120,7 @@ export class ApiService{
     const body = JSON.stringify({ name });
 
     // Make the POST request with the body and headers
-    return this.http.get<any>(`${this.url}/product/getAll`, {headers});
+    return this.http.get<any>(`${this.url}product/getAll`, {headers});
   }
 
   deleteProduct(id: string): Observable<any> {
@@ -133,7 +134,7 @@ export class ApiService{
     });
 
     // Make the DELETE request, passing the product ID in the URL
-    return this.http.delete<any>(`${this.url}/product/delete/${id}`, { headers });
+    return this.http.delete<any>(`${this.url}product/delete/${id}`, { headers });
   }
     getProductByID(id: string): Observable<any> {
     // Retrieve the token from session storage
@@ -146,7 +147,7 @@ export class ApiService{
     });
 
     // Make the DELETE request, passing the product ID in the URL
-    return this.http.delete<any>(`${this.url}/product/getByID/${id}`, { headers });
+    return this.http.delete<any>(`${this.url}product/getByID/${id}`, { headers });
   }
 
   getProductByCategory(categoryID: string): Observable<any> {
@@ -160,10 +161,19 @@ export class ApiService{
     });
 
     // Make the DELETE request, passing the product ID in the URL
-    return this.http.delete<any>(`${this.url}/product/getByCategory/${categoryID}`, { headers });
+    return this.http.delete<any>(`${this.url}product/getByCategory/${categoryID}`, { headers });
   }
 
-
-
+  //
+  // private apiUrl = 'http://localhost:8081'; // Your API URL
+  //
+  //
+  // getAllProducts(): Observable<Product[]> {
+  //   return this.http.get<Product[]>(this.apiUrl+"product/getAll");
+  // }
+  //
+  // getProductsByCategory(categoryId: number): Observable<Product[]> {
+  //   return this.http.get<Product[]>(`${this.apiUrl}category/${categoryId}`);
+  // }
 
 }

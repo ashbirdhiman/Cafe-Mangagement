@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -11,5 +11,14 @@ import {RouterLink} from "@angular/router";
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  constructor(private router: Router) {}
 
+  isLoggedIn(): boolean {
+    return !sessionStorage.getItem('token'); // Check if the token exists
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('token'); // Remove token from session storage
+    this.router.navigate(['/login']); // Redirect to login page
+  }
 }

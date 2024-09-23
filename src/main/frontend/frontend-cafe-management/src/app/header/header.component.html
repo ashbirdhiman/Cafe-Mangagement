@@ -1,4 +1,3 @@
-<!-- header.component.html -->
 <header>
   <div class="header-container">
     <!-- Logo on the left -->
@@ -8,8 +7,18 @@
 
     <!-- Navigation links on the right -->
     <nav class="nav-links">
-      <a routerLink="/login">Login</a>
-      <a routerLink="/signup">Signup</a>
+      <a routerLink="/dashboard">Dashboard</a>
+
+      <!-- Conditionally display Login and Signup links based on session storage -->
+<!--      <ng-container *ngIf="isLoggedIn()">-->
+        <a routerLink="/login">Login</a>
+        <a routerLink="/signup">Signup</a>
+<!--      </ng-container>-->
+
+      <!-- Display Logout link if session storage contains JWT token -->
+<!--      <ng-container *ngIf="isLoggedIn()">-->
+<!--        <a routerLink="/signup">Signup</a>-->
+<!--      </ng-container>-->
     </nav>
   </div>
 </header>
